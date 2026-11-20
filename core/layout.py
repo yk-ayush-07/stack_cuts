@@ -10,15 +10,18 @@ def build_filter_graph(layout_mode: str, dur: float, ass_filename: str, focus: f
 
     if layout_mode == "stacked":
         # Facecam (top 720px) + Gameplay (bottom 1200px) = 1920px height
-        # Map facecam position coordinates in standard 16:9 frame (1920x1080 or 1280x720)
+        # Gaming streams frequently place facecam above the bottom-left minimap (mid-left)
+        # or in standard corners.
         if facecam_pos == "top-left":
-            fc_crop = "crop=w=iw*0.35:h=ih*0.45:x=0:y=0"
+            fc_crop = "crop=w=iw*0.30:h=ih*0.48:x=0:y=0"
         elif facecam_pos == "top-right":
-            fc_crop = "crop=w=iw*0.35:h=ih*0.45:x=iw*0.65:y=0"
+            fc_crop = "crop=w=iw*0.30:h=ih*0.48:x=iw*0.70:y=0"
         elif facecam_pos == "bottom-right":
-            fc_crop = "crop=w=iw*0.35:h=ih*0.45:x=iw*0.65:y=ih*0.55"
-        else: # default bottom-left
-            fc_crop = "crop=w=iw*0.35:h=ih*0.45:x=0:y=ih*0.55"
+            fc_crop = "crop=w=iw*0.30:h=ih*0.48:x=iw*0.70:y=ih*0.48"
+        elif facecam_pos in ("mid-left", "center-left"):
+            fc_crop = "crop=w=iw*0.28:h=ih*0.48:x=0:y=ih*0.30"
+        else:  # default bottom-left (placed above bottom-left minimap/HUD)
+            fc_crop = "crop=w=iw*0.28:h=ih*0.48:x=0:y=ih*0.32"
 
         # Gameplay crop focuses on center action
         gp_crop = "crop=w=iw*0.70:h=ih:x=(iw-ow)/2:y=0"
