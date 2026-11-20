@@ -1,0 +1,4 @@
+yt-dlp>=2026.10.0
+faster-whisper>=1.0.0
+ctranslate2>=4.0.0
+onnxruntime>=1.18.0

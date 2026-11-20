@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+
+# Clips & Media
+clips/
+*.mp4
+*.ts
+*.ass
+*.json.part*
+chat.*
+
+# OS files
+.DS_Store
+Thumbs.db
